@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/nbob/qcomponents/issues"
   },
-  "homepage": "https://github.com/nbob/qcomponents#readme"
+  "homepage": "https://github.com/nbob/qcomponents#readme",
+  "dependencies": {
+    "babel-preset-es2015": "^6.9.0"
+  }
 }
