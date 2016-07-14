@@ -4,7 +4,7 @@
   "description": "qrator labs components",
   "main": "src/index.js",
   "scripts": {
-    "tst": "node_modules/babel-cli/bin/babel.js src --out-dir lib",
+    "tst": "node_modules/babel-cli/bin/babel.js src --out-dir lib"
   },
   "repository": {
     "type": "git",
