@@ -1,6 +1,8 @@
+const c = require('./tst2');
+
 const a = 90,
     b = 278;
 
-export default {
-    a, b
+module.export = {
+    a, b, c
 };
