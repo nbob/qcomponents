@@ -9,10 +9,6 @@ fs.readdirSync('node_modules')
 
 module.exports = {
     devtool: 'source-map',
-    entry: [
-        'webpack-hot-middleware/client',
-        './src/index'
-    ],
     entry: "./src/index.js",
     output: {
         path: path.join(__dirname, 'lib'),
