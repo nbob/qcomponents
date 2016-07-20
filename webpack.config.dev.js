@@ -8,6 +8,11 @@ fs.readdirSync('node_modules')
     .forEach(mod => nodeModules[mod] = 'commonjs ' + mod);
 
 module.exports = {
+    devtool: 'source-map',
+    entry: [
+        'webpack-hot-middleware/client',
+        './src/index'
+    ],
     entry: "./src/index.js",
     output: {
         path: path.join(__dirname, 'lib'),

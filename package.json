@@ -4,7 +4,8 @@
   "description": "qrator labs components",
   "main": "lib/index.js",
   "scripts": {
-    "start": "webpack "
+    "start": "webpack ",
+    "prepublish": "webpack --config webpack.config.dev.js"
   },
   "repository": {
     "type": "git",
@@ -20,7 +21,7 @@
     "url": "https://github.com/nbob/qcomponents/issues"
   },
   "homepage": "https://github.com/nbob/qcomponents#readme",
-  "peerDependencies": {
+  "dependencies": {
     "babel-core": "^6.11.4",
     "babel-loader": "^6.2.4",
     "babel-plugin-transform-object-rest-spread": "^6.8.0",
