@@ -1,8 +1,4 @@
-const c = require('./tst2');
+// const tabsModule = require('./components/Tabs');
+// module.exports = {tabsModule};
 
-const a = 90,
-    b = 278;
-
-module.export = {
-    a, b, c
-};
+module.exports = require('./components/Tabs/index.jsx');
