@@ -2,9 +2,9 @@
   "name": "qcomponents",
   "version": "0.0.1",
   "description": "qrator labs components",
-  "main": "lib/index.js",
+  "main": "lib/index",
   "scripts": {
-    "start": "webpack ",
+    "start": "webpack --config webpack.config.dev.js --watch",
     "prepublish": "webpack --config webpack.config.dev.js"
   },
   "repository": {
@@ -33,5 +33,8 @@
     "react-addons-css-transition-group": "^15.2.1",
     "react-router": "^2.6.0",
     "webpack": "^1.13.1"
+  },
+  "dependencies": {
+    "babel-plugin-add-module-exports": "^0.2.1"
   }
 }

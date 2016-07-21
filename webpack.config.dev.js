@@ -8,29 +8,34 @@ fs.readdirSync('node_modules')
     .forEach(mod => nodeModules[mod] = 'commonjs ' + mod);
 
 module.exports = {
-    devtool: 'source-map',
-    entry: "./src/index.js",
+    // devtool: 'source-map',
+    // entry: {
+    //     // 'index': "./src/index.js",
+    //     'Tabs': "./src/components/Tabs/index.jsx",
+    // },
     output: {
-        path: path.join(__dirname, 'lib'),
+        // path: path.join(__dirname, 'lib'),
         // filename: 'asd',
-        filename: 'index.js',
-        library: true,
+        // filename: '[name].js',
+        // library: true,
         // libraryTarget: 'umd',
         libraryTarget: 'commonjs2',
-        // umdNamedDefine: true
+        // umdNamedDefine: true,
+        library: "QComponents",
     },
-    target: 'node',
+    // target: 'node',
     module: {
         loaders: [
-            {
-                test: /\.css$/,
-                loader: "style!css"
-            },
+            // {
+            //     test: /\.css$/,
+            //     loader: "style!css"
+            // },
             {
                 test: /\.jsx?$/,
+                exclude: /node_modules/,
                 loaders: ['babel']
             }
         ]
     },
-    externals: nodeModules
+    // externals: nodeModules
 };

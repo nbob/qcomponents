@@ -1,7 +1,7 @@
 import React from 'react';
 import classnames from 'classnames';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
-import TabPanel from './TabPanel.jsx';
+import TabPanel from './TabPanel';
 
 // class TabPanelContainer extends React.Component {
 const TabPanelContainer = React.createClass({
