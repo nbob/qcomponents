@@ -6,7 +6,7 @@
   "scripts": {
     "start": "webpack --config webpack.config.dev.js --watch",
     "prepublish": "rm -rf lib && babel ./src -d lib/ --ignore '__tests__'",
-    "build": "rm -rf lib && babel ./src -d lib/ --ignore '__tests__'"
+    "postinstall": "rm -rf lib && babel ./src -d lib/ --ignore '__tests__'"
   },
   "repository": {
     "type": "git",
