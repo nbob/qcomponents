@@ -1,0 +1,53 @@
+@mixin qcomponents-build-preloader($component) {
+
+    $vars: map-get($component, vars);
+
+    @keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(359deg);
+        }
+    }
+
+    .q-backdrop {
+        background-color: map-get($vars, backdrop-background-color);
+        opacity: map-get($vars, backdrop-opacity);
+        position: absolute;
+        transition: opacity .4s;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: map-get($vars, backdrop-z-index);
+
+        &-container {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            margin: 0 auto;
+            width: 100%;
+            text-align: center;
+
+            .q-spin {
+                $spin-speed: map-get($vars, spin-speed);
+
+                color: map-get($vars, spin-color);
+                font-size: map-get($vars, spin-font-size);
+                display: inline-block;
+                animation-name: spin;
+                animation-duration: $spin-speed;
+                animation-iteration-count: infinite;
+                animation-timing-function: linear;
+            }
+        }
+    }
+
+    &.q-preloader-leave {
+        .q-backdrop {
+            opacity: 0;
+        }
+    }
+
+}

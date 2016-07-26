@@ -1,0 +1,46 @@
+$default-theme-variables: (
+    components: (
+        checkbox: (
+            vars: (
+                active-background-color: #00bdd6,
+                active-check-color: white,
+                border-width: 2px,
+                check-width: 10px,
+                check-height: 8px,
+                check-left: 3px,
+                check-top: 3px,
+                size: 18px,
+            )
+        ),
+        preloader: (
+            vars: (
+                backdrop-background-color: black,
+                backdrop-opacity: .5,
+                backdrop-z-index: 100,
+                spin-color: white,
+                spin-font-size: 20px,
+                spin-speed: 1.4s,
+            )
+        ),
+        tabs: (
+            vars: (
+                tab-list: (
+                    background-color: white,
+                    border-bottom-color: #efefef,
+                ),
+                tab: (
+                    active-color: #00bec9,
+
+                    color: #c0c0c0,
+                    height: 48px,
+                    padding: 0 20px,
+
+                    inc-bar-height: 2px,
+                    inc-bar-color: #00bec9
+                ),
+                tab-panel-container: (),
+                tab-panel: ()
+            )
+        )
+    )
+);

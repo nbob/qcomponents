@@ -1,0 +1,34 @@
+@function map-deep-extend($map1, $map2) {
+    $result: ();
+    @if type-of($map1) == 'map' {
+        $processed-keys: ();
+        @each $key, $value1 in $map1 {
+            $res: ($key: $value1);
+            @if map-has-key($map2, $key) {
+                $res: (
+                    $key: map-deep-extend(map-get($map1, $key), map-get($map2, $key))
+                );
+            }
+            $processed-keys: append($processed-keys, $key);
+            $result: map-merge($result, $res);
+        }
+        $additional-values: ();
+        @each $key, $value2 in $map2 {
+            @if index($processed-keys, $key) == null {
+                $additional-values: map-merge($additional-values, ($key: $value2));
+            }
+        }
+        $result: map-merge($result, $additional-values);
+    } @else {
+        $result: $map2;
+    }
+    @return $result;
+};
+
+@function map-get-safe($map, $key, $default:null) {
+    @if map-has-key($map, $key) {
+        @return map-get($map, $key);
+    } @else {
+        @return $default;
+    }
+};

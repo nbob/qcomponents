@@ -1,0 +1,157 @@
+/*
+
+    @mixin qcomponents-build-tabs
+
+    @param {Map} $vars - themes variables for build tabs components
+        @prop {Map} tab - tab component settings
+            @prop {Length} tab.height - tab component style
+        @prop {Map} tab-list - tab-list component settings
+            @prop {Color} tab-list.background-color - background color for tab-list
+            @prop {Color} tab-list.border-bottom-color - border bottom color
+        @prop {Map} tab - tab item component style
+
+
+
+*/
+
+@mixin qcomponents-build-tabs($tabs-component) {
+
+    $tabs-vars: map-get($tabs-component, vars);
+
+    $tab-list-vars: map-get($tabs-vars, 'tab-list');
+    $tab-vars: map-get($tabs-vars, 'tab');
+    $tab-panel-container-vars: map-get($tabs-vars, 'tab-panel-container');
+    $tab-panel-vars: map-get($tabs-vars, 'tab-panel');
+
+    .q-tab-list {
+
+        $tab-height: map-get($tab-vars, 'height');
+
+        position: relative;
+        overflow: hidden;
+        display: block;
+        height: $tab-height;
+        background-color: map-get($tab-list-vars, 'background-color');
+        border-bottom: 1px solid map-get($tab-list-vars, 'border-bottom-color');
+
+        @extend %q-clearfix;
+
+        .q-tab-item {
+            float: left;
+
+            &.active {
+                & > a {
+                    color: map-get($tab-vars, 'active-color');
+
+                    &:after, &:before {
+                        width: 50%;
+                    }
+                }
+            }
+
+            & > a {
+                text-transform: uppercase;
+                font-weight: map-get($tab-vars, 'font-weight');
+                line-height: $tab-height;
+                text-decoration: none;
+                color: map-get($tab-vars, 'color');
+                transition: color .7s;
+                display: inline-block;
+                position: relative;
+                padding: map-get($tab-vars, 'padding');
+                cursor: pointer;
+
+                &:after, &:before {
+                    display: block;
+                    content: '';
+                    position: absolute;
+                    bottom: 0;
+                    width: 0%;
+                    height: map-get($tab-vars, 'inc-bar-height');
+                    background-color: map-get($tab-vars, 'inc-bar-color');
+                    transition: width 0.3s;
+                }
+                &:after {
+                    left: 50%;
+                }
+                &:before {
+                    right: 50%;
+                }
+            }
+
+        }
+    }
+
+    .q-tab-panel-container {
+        position: relative;
+
+        .q-tab-panel {
+            background: white;
+            opacity: 1;
+            transition: opacity .4s;
+
+            @keyframes opacity-and-remove {
+                from {
+                    opacity: 1;
+                }
+                to: {
+                    opacity: 0;
+                    height: 0;
+                }
+            }
+
+            &.hidden {
+                position: absolute;
+                z-index: -1;
+                opacity: 0;
+                top: 0;
+                bottom: 0;
+                right: 0;
+                left: 0;
+            }
+        }
+    }
+};
+
+
+//
+// (
+//     name: "default",
+//     components: (
+//         components: (
+//             tabs: (
+//                 vars: (
+//                     tab-list: (background-color: white, border-bottom-color: #efefef),
+//                     tab: (active-color: #00bec9, color: #c0c0c0, height: 48px, padding: 0 20px, inc-bar-height: 2px, inc-bar-color: #00bec9),
+//                     tab-panel-container: (),
+//                     tab-panel: ()
+//                 )
+//             )
+//         )
+//     ),
+//     base-theme: null,
+//     index: false,
+//     components-to-build: (tabs,)
+// )
+// (
+//     name: "qrator",
+//     components: (
+//         tabs: (
+//             vars: (
+//                 tab-list: (background-color: white, border-bottom-color: #efefef),
+//                 tab: (active-color: #00bec9, color: #c0c0c0, height: 48px, padding: 0 20px, inc-bar-height: 2px, inc-bar-color: #00bec9),
+//                 tab-panel-container: (),
+//                 tab-panel: ()
+//             ),
+//             themes: (
+//                 name: qwe,
+//                 base-theme: default,
+//                 vars: ()
+//             )
+//         )
+//     ),
+//     base-theme:
+//     "default",
+//     index: true,
+//     components-to-build: (tabs,)
+// )

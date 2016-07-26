@@ -1,13 +1,17 @@
 import React from 'react';
+import { ClassNameMixin } from '../Mixins/';
 
-const TabList = React.createClass({
+class TabList extends React.Component {
+
+    static componentName = 'tab-list';
+
     render() {
         return (
-            <div className="tab-list">
+            <div className={this.getClassNames()}>
                 {this.props.children}
             </div>
         );
     }
-});
+}
 
-export default TabList;
+export default ClassNameMixin(TabList);

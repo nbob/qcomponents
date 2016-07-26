@@ -1,0 +1,132 @@
+@import './themes/default.scss';
+@import './util-placeholders.scss';
+@import './util-funcs.scss';
+
+@import "./components/checkbox.scss";
+@import "./components/_preloader.scss";
+@import "./components/_tabs.scss";
+
+
+@function get-prepared-theme($name) {
+    @if $name == 'default' {
+        @return $default-theme-variables;
+    }
+}
+
+$all-components: (checkbox, preloader, tabs);
+
+@function qcomponents-build-themes() {
+    $q-themes-inner: ();
+    @if variable-exists(qcomponents-themes) {
+        $prepared-themes: ();
+        @each $theme in $qcomponents-themes {
+            $name: null;
+            $index: false;
+            $components: ();
+            $base-theme: null;
+            $include-components: null;
+            $ignore-components: null;
+            @if type-of($theme) == 'string' {
+                $name: $theme;
+                $components: map-get(get-prepared-theme($theme), components);
+                $base-theme: null;
+                $index: false;
+                $ignore-components: ();
+                $include-components: $all-components;
+            } @else {
+                $name: map-get($theme, name);
+                $base-theme: map-get-safe($theme, 'base-theme', null);
+                $components: map-deep-extend(
+                    map-get(get-prepared-theme($base-theme), components),
+                    map-get($theme, components)
+                );
+                $index: map-get-safe($theme, 'index', false);
+                $ignore-components: map-get-safe($theme, 'ignore-components', ());
+                $include-components: map-get-safe($theme, 'include-components', $all-components);
+            }
+            $components-to-build: ();
+            @each $name, $var in $include-components {
+                @if index($ignore-components, $name) == null {
+                    $components-to-build: append($components-to-build, $name);
+                }
+            }
+            $theme-item: (
+                name: $name,
+                components: $components,
+                base-theme: $base-theme,
+                index: $index,
+                components-to-build: $components-to-build
+            );
+            $prepared-themes: append($prepared-themes, $theme-item);
+        }
+        $q-themes-inner: $prepared-themes;
+    } @else {
+        $q-themes-inner: (
+            (
+                name: 'default',
+                index: true,
+                base-theme: null,
+                components-to-build: $all-components,
+                components: map-get(get-prepared-theme('default'), components)
+            ),
+        );
+    }
+    @return $q-themes-inner;
+};
+
+$qcomponents-themes: qcomponents-build-themes();
+$components-list: (tabs);
+
+@mixin build-component($component-name, $component-vars) {
+    @if $component-name == 'checkbox' {
+        @include qcomponents-build-checkbox($component-vars);
+    }
+    @if $component-name == 'tabs' {
+        @include qcomponents-build-tabs($component-vars);
+    }
+    @if $component-name == 'preloader' {
+        @include qcomponents-build-preloader($component-vars);
+    }
+}
+
+@each $theme in $qcomponents-themes {
+    $theme-name: map-get($theme, name);
+    $index: map-get($theme, index);
+    $base-theme: map-get($theme, base-theme);
+    $components-to-build: map-get($theme, components-to-build);
+
+    $theme-class-name: '';
+    @if $index == false {
+        $theme-class-name: '-#{$theme-name}';
+    }
+    $components: map-get($theme, components);
+
+    @each $component-name in $components-to-build {
+        $component-class-name: q-#{$component-name};
+        $full-theme-component-class-name: #{$component-class-name + $theme-class-name};
+        $component: map-get($components, $component-name);
+
+        .#{$full-theme-component-class-name} {
+            @include build-component($component-name, $component);
+
+            @if map-has-key($component, themes) {
+                @each $component-theme in map-get($component, themes) {
+                    $sub-theme-name: map-get($component-theme, name);
+                    $sub-component-vars: map-deep-extend(
+                        map-get($component, vars),
+                        map-get($component-theme, vars)
+                    );
+
+                    &.#{$component-class-name}-#{$sub-theme-name} {
+                        @include build-component(
+                            $component-name,
+                            (vars: $sub-component-vars)
+                        );
+                    }
+                }
+            }
+
+        }
+
+    }
+}

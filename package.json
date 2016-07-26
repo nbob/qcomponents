@@ -2,10 +2,11 @@
   "name": "qcomponents",
   "version": "0.0.1",
   "description": "qrator labs components",
-  "main": "lib/index",
+  "main": "lib/",
   "scripts": {
     "start": "webpack --config webpack.config.dev.js --watch",
-    "prepublish": "webpack --config webpack.config.dev.js"
+    "prepublish": "rm -rf lib && babel ./src -d lib/ --ignore '__tests__'",
+    "build": "rm -rf lib && babel ./src -d lib/ --ignore '__tests__'"
   },
   "repository": {
     "type": "git",
@@ -21,20 +22,18 @@
     "url": "https://github.com/nbob/qcomponents/issues"
   },
   "homepage": "https://github.com/nbob/qcomponents#readme",
-  "devDependencies": {
+  "dependencies": {
     "babel-core": "^6.11.4",
     "babel-loader": "^6.2.4",
-    "babel-plugin-transform-object-rest-spread": "^6.8.0",
+    "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-plugin-transform-class-properties": "^6.11.5",
     "babel-preset-es2015": "^6.9.0",
     "babel-preset-react": "^6.11.1",
+    "babel-preset-stage-1": "^6.5.0",
     "classnames": "^2.2.5",
-    "node-uuid": "^1.4.7",
     "react": "^15.2.1",
     "react-addons-css-transition-group": "^15.2.1",
     "react-router": "^2.6.0",
     "webpack": "^1.13.1"
-  },
-  "dependencies": {
-    "babel-plugin-add-module-exports": "^0.2.1"
   }
 }

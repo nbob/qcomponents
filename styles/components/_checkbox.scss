@@ -1,0 +1,59 @@
+@mixin qcomponents-build-checkbox($component) {
+
+    $checkbox-vars: map-get($component, vars);
+
+    $size: map-get($checkbox-vars, size);
+    $border-width: map-get($checkbox-vars, border-width);
+
+    $check-left: map-get($checkbox-vars, check-left);
+    $check-top: map-get($checkbox-vars, check-top);
+    $check-height: map-get($checkbox-vars, check-height);
+    $check-width: map-get($checkbox-vars, check-width);
+
+    position: relative;
+    outline: none;
+    cursor: pointer;
+    width: $size;
+    height: $size;
+
+    &:before {
+        transition: transform .3s ease-in-out;
+        content: "";
+        position: absolute;
+        left: $check-left;
+        top: $check-top;
+        z-index: 1;
+        width: $check-width;
+        height: $check-height;
+        border-width: $border-width;
+        border-style: solid;
+        border-color: transparent;
+    }
+
+    &:after {
+        content: "";
+        position: absolute;
+        left: 0;
+        width: $size - $border-width;
+        height: $size - $border-width;
+        background-color: #fff;
+        cursor: pointer;
+        border-width: $border-width;
+        border-style: solid;
+        border-color: #bdbdbd;
+    }
+
+    &:checked {
+        &:before {
+            transform: rotate(-45deg);
+            border-color: white;
+            border-top-style: none;
+            border-right-style: none;
+        }
+        &:after {
+            background-color: map-get($checkbox-vars, active-background-color);
+            border-color: transparent;
+        }
+    }
+
+}

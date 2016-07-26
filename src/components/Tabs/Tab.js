@@ -1,10 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router';
 import classNames from 'classnames';
+import { ClassNameMixin } from '../Mixins/';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
-const Tab = React.createClass({
-    propTypes: {
+class Tab extends React.Component {
+
+    static componentName = 'tab-item';
+
+    static propTypes = {
         id: React.PropTypes.string.isRequired,
         onClick: React.PropTypes.func,
         to: React.PropTypes.string,
@@ -13,19 +17,20 @@ const Tab = React.createClass({
             React.PropTypes.arrayOf(React.PropTypes.string),
             React.PropTypes.objectOf(React.PropTypes.string)
         ]),
-    },
-    getInitialState() {
-        return {active: this.props.active};
-    },
-    setActiveState(active) {
-        this.setState({active});
-    },
+    };
+
+    static contextTypes = {
+        tabId: React.PropTypes.string.isRequired,
+        onTabClick: React.PropTypes.func.isRequired
+    };
+
     handleClick(e) {
-        this.props.onClick(this);
-    },
+        this.context.onTabClick(this);
+    }
+
     render() {
-        let classes = classNames('tab-item', {
-            'active': this.state.active
+        let classes = classNames(this.getClassNames(), {
+            'active': this.context.tabId == this.props.id
         });
         let link = this.props.to ? (
             <Link to={this.props.to}>
@@ -33,11 +38,11 @@ const Tab = React.createClass({
             </Link>
         ) : (<a>{this.props.children}</a>);
         return (
-            <div onClick={this.handleClick} className={classes}>
+            <div onClick={this.handleClick.bind(this)} className={classes}>
                 {link}
             </div>
         );
     }
-});
+}
 
-export default Tab;
+export default ClassNameMixin(Tab);
