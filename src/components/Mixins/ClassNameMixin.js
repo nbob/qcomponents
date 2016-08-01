@@ -7,7 +7,7 @@ export default (ComposedComponent) => {
 
     ComposedComponent.prototype.getClassNames = function() {
         let classes = [];
-        for (let f of this._classReducers) {
+        for (let f of this.constructor.prototype._classReducers) {
             classes.push(f.bind(this)());
         }
         if (this.props.className) {

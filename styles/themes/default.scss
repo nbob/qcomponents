@@ -1,5 +1,10 @@
 $default-theme-variables: (
     components: (
+        button: (
+            vars: (
+
+            )
+        ),
         checkbox: (
             vars: (
                 active-background-color: #00bdd6,
@@ -12,14 +17,135 @@ $default-theme-variables: (
                 size: 18px,
             )
         ),
+        label: (
+            themes: (
+                (
+                    name: danger,
+                    vars: (
+                        color: white,
+                        background-color: #ff5252,
+                    )
+                ),
+                (
+                    name: warning,
+                    vars: (
+                        color: white,
+                        background-color: #ffc107,
+                    )
+                ), (
+                    name: muted,
+                    vars: (
+                        color: white,
+                        background-color: #bdbdbd,
+                    )
+                ),
+            )
+        ),
+        dropdown: (
+            vars: (
+                list: (
+                    background-color: white,
+                    max-height: 650px,
+                    max-width: 250px,
+                    // width: 200px,
+                    z-index: 200,
+                ),
+                item: (
+                    color: #00bec9,
+                    hover-background-color: #f5f2f0,
+                    padding: 12px 15px,
+                    text-align: left
+                )
+            )
+        ),
+        input-text: (
+            vars: (
+                active-color: #00bec9,
+                color: rgba(0,0,0,0.26),
+
+                input-height: 24px,
+                input-padding-bottom: 4px,
+                label-height: 20px
+            )
+        ),
+        modal: (
+            vars: (
+                z-index: 100,
+                backdrop: (
+                    background-color: black,
+                    opacity: .5,
+                    z-index: 100,
+                    position: absolute
+                ),
+                container: (
+                    background-color: white,
+                    border-radius: 2px,
+                    z-index: 102,
+                ),
+                content: (
+
+                ),
+                header: (
+                    background-color: #f7f7f7,
+                    height: 50px,
+                    padding: 18px 20px,
+                    border-bottom: (
+                        color: #efefef,
+                        style: solid,
+                        width: 1px
+                    )
+                ),
+                footer: (
+                    border-top: (
+                        color: #efefef,
+                        style: solid,
+                        width: 1px
+                    ),
+                )
+            )
+        ),
         preloader: (
             vars: (
-                backdrop-background-color: black,
-                backdrop-opacity: .5,
-                backdrop-z-index: 100,
                 spin-color: white,
                 spin-font-size: 20px,
                 spin-speed: 1.4s,
+                backdrop: (
+                    background-color: black,
+                    opacity: .5,
+                    z-index: 100,
+                    position: absolute
+                )
+            )
+        ),
+        select: (
+            vars: (
+                background-color: transparent,
+                arrow: (
+                    size: 5px,
+                    color: #cac8c8,
+                ),
+                input: (
+                    height: 24px,
+                    border-bottom: 1px solid rgba(0, 0, 0, 0.12),
+                    padding: (
+                        top: 5px,
+                        bottom: 0,
+                        right: 0,
+                        left: 0,
+                    )
+                ),
+                item: (
+                    background-color: white,
+                    height: 24px,
+                    padding: 10px,
+                    color: #00bec9,
+                    hover-background-color: rgba(0, 0, 0, 0.1),
+                ),
+                list: (
+                    background-color: white,
+                    z-index: 90,
+                ),
+
             )
         ),
         tabs: (
@@ -40,6 +166,22 @@ $default-theme-variables: (
                 ),
                 tab-panel-container: (),
                 tab-panel: ()
+            )
+        ),
+        table: (
+            vars: (
+                font-size: 15px,
+            ),
+        ),
+        tooltip: (
+            vars: (
+                background-color: rgba(0, 0, 0, 0.5),
+                border-radius: 2px,
+                color: white,
+                line-height: 24px,
+                padding-left: 10px,
+                padding-right: 10px,
+                z-index: 110,
             )
         )
     )

@@ -1,6 +1,5 @@
 import React from 'react';
 import classnames from 'classnames';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { ClassNameMixin } from '../Mixins';
 
 class TabPanel extends React.Component {

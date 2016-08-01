@@ -9,10 +9,12 @@ export default (ComposedComponent) => {
     ComposedComponent.contextTypes['theme'] = React.PropTypes.string;
 
     ComposedComponent.prototype._classReducers.push(function() {
-        if (!this.context.theme) {
-            return '';
+        let themes = [];
+        if (this.context.theme) {
+            themes = themes.concat(this.context.theme.split(' ').filter(Boolean));
         }
-        let themes = this.context.theme.split(' ').filter(Boolean);
+        let propsThemes = (this.props.theme || '').split(' ').filter(Boolean);
+        themes = themes.concat(propsThemes);
         return themes.map(
             theme => `q-${this.constructor.componentName}-${theme}`
         ).join(" ");

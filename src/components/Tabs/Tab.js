@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router';
 import classNames from 'classnames';
 import { ClassNameMixin } from '../Mixins/';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 class Tab extends React.Component {
 

@@ -1,10 +1,19 @@
 @import './themes/default.scss';
+@import './util-mixins.scss';
 @import './util-placeholders.scss';
 @import './util-funcs.scss';
 
-@import "./components/checkbox.scss";
+@import "./components/_button.scss";
+@import "./components/_checkbox.scss";
+@import "./components/_dropdown.scss";
+@import "./components/_input-text.scss";
+@import "./components/_label.scss";
+@import "./components/_modal.scss";
 @import "./components/_preloader.scss";
+@import "./components/_select.scss";
 @import "./components/_tabs.scss";
+@import "./components/_table.scss";
+@import "./components/_tooltip.scss";
 
 
 @function get-prepared-theme($name) {
@@ -13,7 +22,10 @@
     }
 }
 
-$all-components: (checkbox, preloader, tabs);
+$all-components: (
+    button, checkbox, dropdown, input-text, label,
+    modal, preloader, select, tabs, table, tooltip
+);
 
 @function qcomponents-build-themes() {
     $q-themes-inner: ();
@@ -78,14 +90,38 @@ $qcomponents-themes: qcomponents-build-themes();
 $components-list: (tabs);
 
 @mixin build-component($component-name, $component-vars) {
+    @if $component-name == 'button' {
+        @include qcomponents-build-button($component-vars);
+    }
     @if $component-name == 'checkbox' {
         @include qcomponents-build-checkbox($component-vars);
+    }
+    @if $component-name == 'dropdown' {
+        @include qcomponents-build-dropdown($component-vars);
+    }
+    @if $component-name == 'input-text' {
+        @include qcomponents-build-input-text($component-vars);
+    }
+    @if $component-name == 'label' {
+        @include qcomponents-build-label($component-vars);
+    }
+    @if $component-name == 'modal' {
+        @include qcomponents-build-modal($component-vars);
+    }
+    @if $component-name == 'preloader' {
+        @include qcomponents-build-preloader($component-vars);
+    }
+    @if $component-name == 'select' {
+        @include qcomponents-build-select($component-vars);
+    }
+    @if $component-name == 'table' {
+        @include qcomponents-build-table($component-vars);
     }
     @if $component-name == 'tabs' {
         @include qcomponents-build-tabs($component-vars);
     }
-    @if $component-name == 'preloader' {
-        @include qcomponents-build-preloader($component-vars);
+    @if $component-name == 'tooltip' {
+        @include qcomponents-build-tooltip($component-vars);
     }
 }
 
@@ -107,7 +143,9 @@ $components-list: (tabs);
         $component: map-get($components, $component-name);
 
         .#{$full-theme-component-class-name} {
-            @include build-component($component-name, $component);
+            @if map-has-key($component, vars) {
+                @include build-component($component-name, $component);
+            }
 
             @if map-has-key($component, themes) {
                 @each $component-theme in map-get($component, themes) {

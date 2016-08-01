@@ -1,0 +1,24 @@
+@mixin qcomponents-build-table($component) {
+
+    font-size: 15px;
+    border: none;
+
+    tbody {
+        tr {
+            height: 48px;
+            transition-duration: .3s;
+            transition-property: background-color;
+            background-color: white;
+
+            td {
+                border-top: 1px solid rgba(0,0,0,0.12);
+                box-sizing: border-box;
+
+                &:last-of-type {
+                    border-bottom: 1px solid rgba(0,0,0,0.12);
+                }
+            }
+        }
+    }
+
+}

@@ -1,0 +1,85 @@
+@mixin qcomponents-build-select($component) {
+
+    $vars: map-get($component, vars);
+
+    $input-vars: map-get($vars, input);
+    $arrow-vars: map-get($vars, arrow);
+    $list-vars: map-get($vars, list);
+    $item-vars: map-get($vars, item);
+
+    $input-height: map-get($input-vars, height);
+    $input-padding: map-get($input-vars, padding);
+    $arrow-size: map-get($arrow-vars, size);
+
+    position: relative;
+    display: inline-block;
+    background: map-get($vars, background-color);
+    min-width: 150px;
+
+    .q-select-field {
+        height: $input-height;
+        line-height: $input-height;
+        border-bottom: map-get($input-vars, border-bottom);
+        cursor: pointer;
+        position: relative;
+
+        @include qcomponents-padding($input-padding);
+        padding-right: $arrow-size;
+    }
+
+    .q-select-down-arrow {
+        width: 0;
+        height: 0;
+
+        border-left-style: solid;
+        border-left-color: transparent;
+        border-left-width: $arrow-size;
+
+        border-right-style: solid;
+        border-right-color: transparent;
+        border-right-width: $arrow-size;
+
+        border-top-style: solid;
+        border-top-color: map-get($arrow-vars, color);
+        border-top-width: $arrow-size;
+
+        position: absolute;
+        right: 5px;
+
+        $input-top-padding: map-get($input-padding, top);
+        @if $input-top-padding == null {
+            $input-top-padding: 0;
+        }
+
+        $input-bottom-padding: map-get($input-padding, bottom);
+        @if $input-bottom-padding == null {
+            $input-bottom-padding: 0;
+        }
+
+        top: ($input-height  - $arrow-size) / 2 + $input-top-padding - $input-bottom-padding;
+    }
+
+    .q-select-list {
+        position: absolute;
+        z-index: map-get($list-vars, z-index);
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+        background-color: map-get($list-vars, background-color);
+        width: 100%;
+        box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.15), 0 2px 10px 0 rgba(0, 0, 0, 0.10);
+    }
+
+    .q-select-item {
+        background-color: white;
+        transition: background-color .3s;
+        padding: map-get($item-vars, padding);
+        cursor: pointer;
+        color: map-get($item-vars, color);
+
+        &:hover {
+            background-color: map-get($item-vars, hover-background-color);
+        }
+    }
+
+}

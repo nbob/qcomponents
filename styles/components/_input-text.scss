@@ -1,0 +1,67 @@
+@mixin qcomponents-build-input-text($component) {
+
+    $vars: map-get($component, vars);
+
+    $input-height: map-get($vars, input-height);
+    $input-padding-bottom: map-get($vars, input-padding-bottom);
+    $input-font-size: map-get($vars, input-font-size);
+    $label-height: map-get($vars, label-height);
+
+    $color: map-get($vars, color);
+    $active-color: map-get($vars, active-color);
+
+    position: relative;
+    height: $input-height;
+    padding-top: $label-height;
+
+    label {
+        position: absolute;
+        transform: translate3d(4px, $input-height, 0) scale(1.2);
+        color: $color;
+        top: 0;
+        font-size: 12px;
+        transition: transform .3s, bottom .3s;
+        line-height: 16px;
+        height: $label-height;
+        pointer-events:none;
+    }
+
+    input {
+        @include qcomponents-simple-input((
+            height: $input-height,
+            padding-bottom: $input-padding-bottom,
+            font-size: $input-font-size
+        ));
+    }
+
+    &:before {
+        position: absolute;
+        content: '';
+        display: block;
+        height: 2px;
+        background-color: $active-color;
+        left: 0;
+        width: 0%;
+        bottom: 0;
+        transition: left .3s, width .3s;
+    }
+
+    &.q-input-text-focused {
+        &:before {
+            left: 0;
+            width: 100%;
+        }
+
+        label {
+            color: $active-color;
+        }
+    }
+
+    &.q-input-text-label-up {
+        label {
+            transform: translate3d(0, 0, 0) scale(1);
+            -webkit-font-smoothing: antialiased;
+        }
+    }
+
+}

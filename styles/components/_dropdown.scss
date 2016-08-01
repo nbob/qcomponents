@@ -1,0 +1,70 @@
+@mixin qcomponents-build-dropdown($component) {
+
+    $vars: map-get($component, vars);
+
+    $list-vars: map-get($vars, list);
+    $item-vars: map-get($vars, item);
+
+    @keyframes q-dropdown-opacity {
+        from {opacity: 0}
+        to {opacity: 1}
+    }
+
+    display: inline-block;
+    position: relative;
+
+    .q-dropdown-button {
+        display: inline-block;
+        cursor: pointer;
+    }
+
+    .q-dropdown-list {
+        position: absolute;
+        z-index: map-get($list-vars, z-index);
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+
+        display: none;
+        transition: opacity 3s;
+
+        background-color: map-get($list-vars, background-color);
+        box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.15), 0 2px 10px 0 rgba(0, 0, 0, 0.10);
+
+        $list-max-height: map-get($list-vars, max-height);
+        @if $list-max-height != null {
+            max-height: $list-max-height;
+        }
+
+        $list-max-width: map-get($list-vars, max-width);
+        @if $list-max-width != null {
+            max-width: $list-max-width;
+        }
+
+        $list-width: map-get($list-vars, width);
+        @if $list-width != null {
+            width: $list-width;
+        }
+
+        overflow-y: auto;
+
+        .q-dropdown-item {
+            box-sizing: border-box;
+            width: 100%;
+            text-align: map-get($item-vars, text-align);
+            padding: map-get($item-vars, padding);
+            cursor: pointer;
+            color: map-get($item-vars, color);
+            &:hover {
+                background-color: map-get($item-vars, hover-background-color);
+            }
+        }
+
+        &.q-dropdown-list-open {
+            display: block;
+            animation: q-dropdown-opacity .3s;
+        }
+
+    }
+
+}

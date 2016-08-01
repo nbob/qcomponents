@@ -1,11 +1,40 @@
-@mixin q-backdrop($background-color, $opacity, $position) {
-    background-color: $background-color;
-    opacity: $opacity;
-    position: fixed;
+@mixin qcomponents-backdrop($vars) {
+    background-color: map-get($vars, background-color);
+    opacity: map-get($vars, opacity);
+    position: map-get($vars, position);
     transition: opacity .5s;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
-    z-index: 100;
+    z-index: map-get($vars, z-index);
+}
+
+@mixin qcomponents-simple-input($vars) {
+    height: map-get($vars, height);
+    line-height: map-get($vars, height);
+    max-width: 100%;
+    display: inline-block;
+    box-sizing: border-box;
+    border: none;
+    outline: none;
+    padding-bottom: map-get($vars, padding-bottom);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+
+    @if map-get($vars, font-size) != null {
+        font-size: map-get($vars, font-size);
+    }
+}
+
+@mixin qcomponents-padding($vars) {
+    @if type-of($vars) == 'map' {
+        @each $side in (top, right, bottom, left) {
+            @if map-get($vars, $side) != null {
+                padding-#{$side}: map-get($vars, $side);
+            }
+        }
+    } @else {
+        padding: $vars;
+    }
+
 }

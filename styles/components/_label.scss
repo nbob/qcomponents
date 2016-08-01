@@ -1,0 +1,10 @@
+@mixin qcomponents-build-label($component) {
+
+    $vars: map-get($component, vars);
+
+    display: inline-block;
+    color: map-get($vars, color);
+    background-color: map-get($vars, background-color);
+    border-radius: 2px;
+    padding: 1px 4px;
+}

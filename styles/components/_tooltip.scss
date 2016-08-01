@@ -1,0 +1,37 @@
+@mixin qcomponents-build-tooltip($component) {
+
+    $tooltip-vars: map-get($component, vars);
+
+    position: absolute;
+
+    .q-tooltip-container {
+        background-color: map-get($tooltip-vars, background-color);
+        opacity: 1;
+        position: absolute;
+        z-index: map-get($tooltip-vars, z-index);
+
+        line-height: map-get($tooltip-vars, line-height);
+        padding-left: map-get($tooltip-vars, padding-left);
+        padding-right: map-get($tooltip-vars, padding-right);
+        border-radius: map-get($tooltip-vars, border-radius);
+        color: map-get($tooltip-vars, color);
+
+        &.q-tooltip-enter {
+            opacity: 0;
+        }
+
+        &.q-tooltip-enter-active {
+            opacity: 1;
+            transition: all .3s ease-out;
+        }
+
+        &.q-tooltip-leave {
+            opacity: 1;
+        }
+
+        &.q-tooltip-leave-active {
+            opacity: 0;
+            transition: all .3s ease-out;
+        }
+    }
+}

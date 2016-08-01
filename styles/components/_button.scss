@@ -1,0 +1,15 @@
+@mixin qcomponents-build-button($component) {
+
+    display: inline-block;
+    box-sizing: border-box;
+    padding: 12px 14px;
+    outline: none;
+    height: 36px;
+    border-radius: 2px;
+    background-color: white;
+    transition: background-color .3s;
+
+    &:hover {
+        background-color: rgba(153, 153, 153, 0.2);
+    }
+}

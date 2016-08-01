@@ -1,0 +1,67 @@
+@mixin qcomponents-build-modal($component) {
+
+    $vars: map-get($component, vars);
+
+    $container-vars: map-get($vars, container);
+    $header-vars: map-get($vars, header);
+    $content-vars: map-get($vars, content);
+    $footer-vars: map-get($vars, footer);
+
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: map-get($vars, z-index);
+
+    .q-backdrop {
+        @include qcomponents-backdrop(map-get($vars, backdrop));
+    }
+
+    .q-modal-container {
+        transition: opacity .4s;
+        z-index: map-get($container-vars, z-index);
+        background-color: map-get($container-vars, background-color);
+        position: absolute;
+        top: 0;
+        box-shadow: rgba(0, 0, 0, .2) 0px 15px 40px, rgba(0, 0, 0, .2) 0px 10px 20px;
+        border-radius: map-get($container-vars, border-radius);
+
+        .q-modal-header {
+            height: map-get($header-vars, height);
+            box-sizing: border-box;
+            background-color: map-get($header-vars, background-color);
+            width: 100%;
+            padding: map-get($header-vars, padding);
+
+            $header-border-bottom: map-get($header-vars, border-bottom);
+            @if $header-border-bottom != null {
+                border-bottom-color: map-get($header-border-bottom, color);
+                border-bottom-style: map-get($header-border-bottom, style);
+                border-bottom-width: map-get($header-border-bottom, width);
+            }
+        }
+
+        .q-modal-close-button {
+            cursor: pointer;
+        }
+
+        .q-modal-content {}
+
+        .q-modal-footer {
+            $footer-border-top: map-get($footer-vars, border-top);
+            @if footerheader-top-top != null {
+                border-top-color: map-get($footer-border-top, color);
+                border-top-style: map-get($footer-border-top, style);
+                border-top-width: map-get($footer-border-top, width);
+            }
+        }
+    }
+
+    &.q-modal-leave, &.q-modal-enter {
+        .q-backdrop, .q-modal-container {
+            opacity: 0;
+        }
+    }
+
+}
